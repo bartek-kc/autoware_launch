@@ -22,11 +22,11 @@ from launch.conditions import IfCondition
 from launch.conditions import UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions import PushRosNamespace
 from launch_ros.descriptions import ComposableNode
 from launch_ros.substitutions import FindPackageShare
 import yaml
+from autoware_utils.respawnable_node_container import RespawnableNodeContainer
 
 
 def launch_setup(context, *args, **kwargs):
@@ -222,7 +222,7 @@ def launch_setup(context, *args, **kwargs):
         ],
     )
 
-    container = ComposableNodeContainer(
+    container = RespawnableNodeContainer(
         name="control_container",
         namespace="",
         package="rclcpp_components",

@@ -24,10 +24,10 @@ from launch.conditions import UnlessCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PythonExpression
-from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 from launch_ros.substitutions import FindPackageShare
 import yaml
+from autoware_utils.respawnable_node_container import RespawnableNodeContainer
 
 
 def generate_launch_description():
@@ -411,7 +411,7 @@ def generate_launch_description():
         extra_arguments=[{"use_intra_process_comms": LaunchConfiguration("use_intra_process")}],
     )
 
-    container = ComposableNodeContainer(
+    container = RespawnableNodeContainer(
         name="behavior_planning_container",
         namespace="",
         package="rclcpp_components",

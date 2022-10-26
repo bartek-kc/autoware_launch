@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import launch
-from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
+from autoware_utils.respawnable_node_container import RespawnableNodeContainer
 
 
 def _create_api_node(node_name, class_name, **kwargs):
@@ -34,7 +34,7 @@ def generate_launch_description():
         _create_api_node("route", "Route"),
         _create_api_node("velocity", "Velocity"),
     ]
-    container = ComposableNodeContainer(
+    container = RespawnableNodeContainer(
         namespace="internal",
         name="autoware_iv_adaptor",
         package="rclcpp_components",

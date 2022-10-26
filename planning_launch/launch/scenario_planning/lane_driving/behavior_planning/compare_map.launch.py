@@ -18,9 +18,9 @@ from launch.actions import SetLaunchConfiguration
 from launch.conditions import IfCondition
 from launch.conditions import UnlessCondition
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import ComposableNodeContainer
 from launch_ros.actions import LoadComposableNodes
 from launch_ros.descriptions import ComposableNode
+from autoware_utils.respawnable_node_container import RespawnableNodeContainer
 
 
 def generate_launch_description():
@@ -60,7 +60,7 @@ def generate_launch_description():
         ),
     ]
 
-    compare_map_container = ComposableNodeContainer(
+    compare_map_container = RespawnableNodeContainer(
         name="compare_map_container",
         namespace="",
         package="rclcpp_components",
